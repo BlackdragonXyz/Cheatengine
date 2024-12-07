@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Dragon Mahjong Slot</title>
+    <style>
+        /* Tema Global */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: url('asw.gif') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #ffcc00;
+            text-shadow: 0 0 20px #ff9900, 0 0 40px #ff6600;
+        }
+
+        .input-id {
+            margin-top: 30px;
+            width: 250px;
+            height: 40px;
+            font-size: 1.2em;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 5px 10px;
+            background: #333333;
+            color: #ffcc00;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .input-id:focus {
+            box-shadow: 0 0 20px #ff0000, 0 0 30px #ff6600;
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        .button-lock {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #ff0000;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .button-lock:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffcc00;
+            z-index: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 2s ease-out;
+        }
+
+        .button-lock:hover:before {
+            transform: scaleX(1);
+        }
+
+        .button-lock span {
+            z-index: 1;
+            position: relative;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 30px;
+            background-color: red; /* Awal dengan warna merah */
+            border-radius: 15px;
+            transition: width 1s ease-in-out; /* Progres lebih lama */
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+
+        .progress-label {
+            font-size: 1.2em;
+            color: #ffffff;
+            text-shadow: 0 0 5px #ff6600;
+        }
+
+        .mahjong-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+        }
+
+        /* Kotak Teks Pesan */
+        .info-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            border: 2px solid #ffcc00;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.8);
+        }
+
+        /* Galeri Gambar Scrollable (Satu Gambar Besar) */
+        .image-gallery {
+            width: 100%;
+            height: 500px;
+            overflow-x: auto; /* Membuat gambar bisa digulirkan ke kanan */
+            overflow-y: hidden;
+            white-space: nowrap;
+            margin-top: 20px;
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .image-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        /* Tombol */
+        .button-group {
+            margin-top: 20px;
+        }
+
+        .button-group .button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #25d366;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .button-group .button:hover {
+            background-color: #128c7e;
+        }
+
+        /* Notifikasi */
+        #notification {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+            font-size: 1em;
+            z-index: 1000;
+        }
+
+        #notification a {
+            color: #25d366;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CHEAT ENGINE FIRSTPLAY88</h1>
+        <input type="text" id="memberId" class="input-id" placeholder="Masukkan ID Anda">
+        <button class="button-lock" onclick="lockId()"><span>Lock ID</span></button>
+
+        <!-- Kotak Teks Informasi -->
+        <div class="info-box">
+            HARAP PERHATIKAN UNTUK SETUJUI LOCK ID ANDA AKTIF SILAHKAN HUBUNGI ADMIN UNTUK APPROVE LOCK ID ANDA, LOCK ID TIDAK AKAN AKTIF JIKA ANDA TIDAK CHAT ADMIN.
+        </div>
+
+        <!-- Mesin Slot -->
+        <div id="slotMachine" style="display: none;">
+            <!-- Progres untuk Mahjong 1 -->
+            <div class="progress-container">
+                <div class="progress-bar" id="mahjong1Progress"></div>
+                <div class="progress-label" id="mahjong1Label">Mahjong 1: 0%</div>
+                <img class="mahjong-image" src="images/mahjong1.jpeg" alt="Mahjong 1">
+            </div>
+
+            <!-- Progres untuk Mahjong 2 -->
+            <div class="progress-container">
+                <div class="progress-bar" id="mahjong2Progress"></div>
+                <div class="progress-label" id="mahjong2Label">Mahjong 2: 0%</div>
+                <img class="mahjong-image" src="images/mahjong2.jpg" alt="Mahjong 2">
+            </div>
+
+            <!-- Progres untuk Mahjong 3 -->
+            <div class="progress-container">
+                <div class="progress-bar" id="mahjong3Progress"></div>
+                <div class="progress-label" id="mahjong3Label">Mahjong 3: 0%</div>
+                <img class="mahjong-image" src="images/mahjong3.jpeg" alt="Mahjong 3">
+            </div>
+
+            <div class="button-group">
+                <a href="register.html" class="button">Daftar Sekarang</a>
+                <a href="https://wa.me/17827173775" class="button">Chat Admin</a>
+            </div>
+        </div>
+
+        <!-- Galeri Gambar Scrollable (Satu Gambar Besar) -->
+        <div class="image-gallery">
+            <img src="images/images.png" alt="Gambar 1">
+            <img src="images/large2.jpg" alt="Gambar 2">
+            <img src="images/large3.png" alt="Gambar 3">
+            <img src="images/large4.jpg" alt="Gambar 4">
+        </div>
+
+        <!-- Notifikasi -->
+        <div id="notification">
+            <p>ID Anda berhasil dikunci! Untuk mengaktifkan fitur, silakan <a href="https://wa.me/17827173775" target="_blank">chat admin utama</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        function lockId() {
+            const id = document.getElementById("memberId").value;
+            if (!id) {
+                alert("Masukkan ID Anda!");
+                return;
+            }
+
+            // Tampilkan mesin slot
+            document.getElementById("slotMachine").style.display = "block";
+
+            // Tampilkan notifikasi
+            const notification = document.getElementById("notification");
+            notification.style.display = "block";
+
+            // Sembunyikan notifikasi setelah beberapa detik
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 5000); // Durasi 5 detik
+
+            // Fungsi untuk memperbarui progres dan warna
+            function updateProgress(barId, labelId, min, max) {
+                let progress = 0;
+                const target = Math.floor(Math.random() * (max - min + 1)) + min;
+                const interval = setInterval(() => {
+                    if (progress >= target) {
+                        clearInterval(interval);
+                    } else {
+                        progress++;
+                        let progressBar = document.getElementById(barId);
+                        progressBar.style.width = progress + "%";
+
+                        // Menyesuaikan warna progres
+                        if (progress < 50) {
+                            progressBar.style.backgroundColor = "red";  // Warna merah
+                        } else if (progress < 80) {
+                            progressBar.style.backgroundColor = "orange";  // Warna oranye
+                        } else {
+                            progressBar.style.backgroundColor = "green";  // Warna hijau
+                        }
+
+                        document.getElementById(labelId).innerText = `${labelId.replace('Label', '')}: ${progress}%`;
+                    }
+                }, 100); // Durasi progres lebih lama
+            }
+
+            updateProgress("mahjong1Progress", "mahjong1Label", 85, 98);
+            updateProgress("mahjong2Progress", "mahjong2Label", 85, 98);
+            updateProgress("mahjong3Progress", "mahjong3Label", 85, 98);
+        }
+    </script>
+</body>
+</html>
